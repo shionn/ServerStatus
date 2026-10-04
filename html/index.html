@@ -23,8 +23,7 @@
 		function restart() {
 			var b = document.getElementById('restart');
 			b.textContent = 'Relance en cours…';
-			var endpoint = '/cgi-bin/restart-llama-serve.sh';
-			fetch(endpoint, { cache: 'no-store' })
+			fetch('/cgi-bin/restart-llama-serve.sh', { cache: 'no-store' })
 				.then(function (r) { return r.text(); })
 				.then(function (t) {
 					b.textContent = 'Relancer llama-serve';
