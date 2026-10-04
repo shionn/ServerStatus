@@ -19,25 +19,24 @@
 				});
 		}
 		setInterval(refresh, 2000);
-
-		function restart() {
-			var b = document.getElementById('restart');
-			b.textContent = 'Relance en cours…';
-			fetch('/cgi-bin/restart-llama-serve.sh', { cache: 'no-store' })
-				.then(function (r) { return r.text(); })
-				.then(function (t) {
-					b.textContent = 'Relancer llama-serve';
-				})
-				.catch(function (e) {
-					b.textContent = e.message;
-				});
-		}
-
 	})();
+
+	function restart_llama() {
+		var b = document.getElementById('restart');
+		b.textContent = 'Relance en cours…';
+		fetch('/cgi-bin/restart-llama-serve.sh', { cache: 'no-store' })
+			.then(function (r) { return r.text(); })
+			.then(function (t) {
+				b.textContent = 'Relancer llama-serve';
+			})
+			.catch(function (e) {
+				b.textContent = e.message;
+			});
+	}
 </script>
 </head>
 <body>
 	<pre id="nvidia-smi">Chargement…</pre>
-	<button id="restart" onclick="restart()">Relancer llama-serve</button>
+	<button id="restart" onclick="restart_llama()">Relancer llama-serve</button>
 </body>
 </html>
