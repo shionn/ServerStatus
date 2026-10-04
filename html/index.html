@@ -23,10 +23,12 @@
 
 	function restart_llama() {
 		var b = document.getElementById('restart');
+		var log = document.getElementById('log');
 		b.textContent = 'Relance en cours…';
 		fetch('/cgi-bin/restart-llama-serve.sh', { cache: 'no-store' })
 			.then(function (r) { return r.text(); })
 			.then(function (t) {
+				log.textContent = t;
 				b.textContent = 'Relancer llama-serve';
 			})
 			.catch(function (e) {
@@ -38,5 +40,6 @@
 <body>
 	<pre id="nvidia-smi">Chargement…</pre>
 	<button id="restart" onclick="restart_llama()">Relancer llama-serve</button>
+	<pre id="log"></pre>
 </body>
 </html>
