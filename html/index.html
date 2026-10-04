@@ -5,23 +5,22 @@
 <title>Statut GPU — nvidia-smi</title>
 <script>
 	(function () {
-		var pre = document.getElementById('nvidia-smi');
-		var last = document.getElementById('last');
-		var endpoint = 'nvidia-smi';
+		var endpoint = '/cgi-bin/nvidia-smi';
 		var interval = 5000;
 		
 		function refresh() {
 			fetch(endpoint, { cache: 'no-store' })
 				.then(function (r) { return r.text(); })
 				.then(function (t) {
+					var pre = document.getElementById('nvidia-smi');
+					var last = document.getElementById('last');
 					pre.textContent = t;
 					last.textContent = 'Dernière mise à jour : ' + new Date().toLocaleTimeString();
 				})
 				.catch(function (e) {
-				  pre.textContent = 'Erreur de récupération\n' + e.message;
+					pre.textContent = 'Erreur de récupération\n' + e.message;
 				});
 		}
-		refresh();
 		setInterval(refresh, interval);
 	})();
 </script>
